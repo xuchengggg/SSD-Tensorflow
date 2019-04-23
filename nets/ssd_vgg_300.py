@@ -375,6 +375,7 @@ def ssd_anchors_all_layers(img_shape,
                                              anchor_steps[i],
                                              offset=offset, dtype=dtype)
         layers_anchors.append(anchor_bboxes)
+    "layers_anchors是一个list，包含所有层的anchor，list里面是tuple，每个tuple包含一层feature map的 (y,x,h,w)"
     return layers_anchors
 
 
