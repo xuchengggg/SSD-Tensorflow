@@ -187,7 +187,7 @@ class SSDNet(object):
                                       self.params.anchor_steps,
                                       self.params.anchor_offset,
                                       dtype)
-
+    "anchors就是所有层的anchor的list，即layers_anchors"
     def bboxes_encode(self, labels, bboxes, anchors,
                       scope=None):
         """Encode labels and bounding boxes.
