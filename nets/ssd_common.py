@@ -94,6 +94,9 @@ def tf_ssd_bboxes_encode_layer(labels,
                   feat_ymin, feat_xmin, feat_ymax, feat_xmax):
         """Condition: check label index.
         """
+        """
+        tf.less就是比较i与labels.shape的大小，如果小就返回true 否则返回false，即遍历所有label
+        """
         r = tf.less(i, tf.shape(labels))
         return r[0]
 
