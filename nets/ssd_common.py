@@ -134,6 +134,13 @@ def tf_ssd_bboxes_encode_layer(labels,
         return [i+1, feat_labels, feat_scores,
                 feat_ymin, feat_xmin, feat_ymax, feat_xmax]
     # Main loop definition.
+    """
+    tf.while_loop(condition,body,init_state): 
+                   condition是一个函数，负责判断继续执行循环的条件 
+                   body是每个循环体内执行的操作，负责对循环状态进行更新
+                   init_state表示初始状态 可以包含多个tensor或者tensorarray
+                   返回结果是循环结束时的循环状态
+    """
     i = 0
     [i, feat_labels, feat_scores,
      feat_ymin, feat_xmin,
