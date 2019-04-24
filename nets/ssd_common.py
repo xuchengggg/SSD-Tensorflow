@@ -122,6 +122,8 @@ def tf_ssd_bboxes_encode_layer(labels,
         """
         tf.greater(jaccard,feat_scores) jaccard比feat_scores大即为真
         tf.logical_and(mask,feat_scores > -0.5)两个都为真才为真
+        对第一个真实框做检测的时候，预测框与真实框交并比大于0,该预测框的mask就为true，之后feat_socres上的值就为交并比
+        对第二个真实框做检测的时候，预测框与真实框的交并比要大于与上一个真实框的交并比，mask才为true
         """
         mask = tf.greater(jaccard, feat_scores)
         # mask = tf.logical_and(mask, tf.greater(jaccard, matching_threshold))
