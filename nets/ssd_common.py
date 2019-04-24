@@ -170,6 +170,7 @@ def tf_ssd_bboxes_encode_layer(labels,
     feat_h = feat_ymax - feat_ymin
     feat_w = feat_xmax - feat_xmin
     # Encode features.
+    #预测框与真实框变换的loss
     feat_cy = (feat_cy - yref) / href / prior_scaling[0]
     feat_cx = (feat_cx - xref) / wref / prior_scaling[1]
     feat_h = tf.log(feat_h / href) / prior_scaling[2]
