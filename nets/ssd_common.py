@@ -60,9 +60,15 @@ def tf_ssd_bboxes_encode_layer(labels,
     feat_xmin = tf.zeros(shape, dtype=dtype)
     feat_ymax = tf.ones(shape, dtype=dtype)
     feat_xmax = tf.ones(shape, dtype=dtype)
-
+    
+    """
+    计算预测框与真实框的IOU bbox为真实框的坐标
+    """
     def jaccard_with_anchors(bbox):
         """Compute jaccard score between a box and the anchors.
+        """
+        """
+        计算相交的坐标，然后计算相交面积，然后计算交并比
         """
         int_ymin = tf.maximum(ymin, bbox[0])
         int_xmin = tf.maximum(xmin, bbox[1])
@@ -110,8 +116,13 @@ def tf_ssd_bboxes_encode_layer(labels,
         # Jaccard score.
         label = labels[i]
         bbox = bboxes[i]
+        #返回的是交并比，算某一层所有的框与图像中第i个框的交并比
         jaccard = jaccard_with_anchors(bbox)
         # Mask: check threshold + scores + no annotations + num_classes.
+        """
+        tf.greater(jaccard,feat_scores) jaccard比feat_scores大即为真
+        tf.logical_and(mask,feat_scores > -0.5)两个都为真才为真
+        """
         mask = tf.greater(jaccard, feat_scores)
         # mask = tf.logical_and(mask, tf.greater(jaccard, matching_threshold))
         mask = tf.logical_and(mask, feat_scores > -0.5)
