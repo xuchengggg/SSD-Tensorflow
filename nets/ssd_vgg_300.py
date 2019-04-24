@@ -705,6 +705,9 @@ def ssd_losses_old(logits, localisations,
                     nmask = tf.logical_and(tf.logical_not(pmask),
                                            gscores[i] > -0.5)
                     fnmask = tf.cast(nmask, dtype)
+                    """
+                    navles就是每个score<0.5的预测框被预测为0 即背景的概率
+                    """
                     nvalues = tf.where(nmask,
                                        predictions[:, :, :, :, 0],
                                        1. - fnmask)
